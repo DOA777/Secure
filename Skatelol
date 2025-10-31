@@ -6928,11 +6928,11 @@ if not Mobile then
 
         function library:tab(properties)
             local cfg = {
-                name = properties.name or properties.Name or "visuals"; 
+                name = properties.name or properties.Name or "ESP"; 
                 icon = properties.icon or properties.Icon or "http://www.roblox.com/asset/?id=6034767608";
                 
                 -- multi 
-                tabs = properties.tabs or properties.Tabs or {"Main", "Misc.", "Settings"};
+                tabs = properties.tabs or properties.Tabs or {"Character","Misc.", "Settings"};
                 pages = {}; -- data store for multi sections
                 current_multi; 
                 
@@ -7257,7 +7257,7 @@ if not Mobile then
         end
 
         function library:seperator(properties)
-            local cfg = {items = {}, name = properties.Name or properties.name or "General"}
+            local cfg = {items = {}, name = properties.Name or properties.name or "Settings"}
 
             local items = cfg.items do 
                 items[ "name" ] = library:create( "TextLabel" , {
@@ -9764,7 +9764,7 @@ if not Mobile then
 
         function library:init_config(window) 
             window:seperator({name = "Settings"})
-            local main, playerlist = window:tab({name = "Configs", tabs = {"Main", "Playerlist"}})
+            local main, playerlist = window:tab({name = "Settings", tabs = {"Main", "Playerlist"}})
             
             local column = main:column({})
             local section = column:section({name = "Configs", size = 1, default = false, icon = "rbxassetid://139628202576511"})
@@ -9833,8 +9833,8 @@ if not Mobile then
                 end
             })
 
-            section:colorpicker({name = "Menu Accent", callback = function(color, alpha) library:update_theme("accent", color) end, color = themes.preset.accent})
-            section:keybind({name = "Menu Bind", key = Enum.KeyCode.Insert, callback = function(bool) window.toggle_menu(bool) end, seperator = true, default = true})
+            section:colorpicker({name = "Menu Color", callback = function(color, alpha) library:update_theme("accent", color) end, color = themes.preset.accent})
+            section:keybind({name = "Menu Hotkey", key = Enum.KeyCode.Insert, callback = function(bool) window.toggle_menu(bool) end, seperator = true, default = true})
 
             local _request = (http_request and http_request) or (request and request) or (http and http.request)
 
@@ -13957,7 +13957,7 @@ local window = library:window({name = "Unbranded", suffix = ".lol", gameInfo = s
 
 if Game_Name == "The Bronx" then
     window:seperator({name = "Game"}) do
-        local LocalPlayerTab, PlayersTab, PurchaseGunTab, MiscTab, SafeTab = window:tab({name = "Main", tabs = {"Local Player", "Players", "Teleports", "Misc", "Safe"}, icon = GetImage("World.png")}) do
+        local LocalPlayerTab, PlayersTab, PurchaseGunTab, MiscTab, SafeTab = window:tab({name = "Character", tabs = {"Local Player", "Players", "Teleports", "Misc", "Safe"}, icon = GetImage("World.png")}) do
             do -- \\ Safe Tab
                 local SafeItemColumn = SafeTab:column({})
 
@@ -14113,7 +14113,7 @@ if Game_Name == "The Bronx" then
             do -- \\ Local Player Tab
                 local LocalPlayerColumn = LocalPlayerTab:column({})
 
-                local LocalPlayerModsSection = LocalPlayerColumn:section({name = "Local Player Modifications", side = "left", size = 1.0135})
+                local LocalPlayerModsSection = LocalPlayerColumn:section({name = "Character Modifications", side = "left", size = 1.0135})
 
                 local __Modifications = {
                     "Infinite Sleep";
@@ -14546,9 +14546,9 @@ if Game_Name == "The Bronx" then
                     end)
                 end})
 
-                DupingSection:label({wrapped = true, name = "This might bug if you have more than 1 of the item you're duping!"})
+                DupingSection:label({wrapped = true, name = "This might break if you have multiple of this item in your inventory of the item you're duping!"})
 
-                local VulnerabilitySection = Column:section({name = "Vulnerability Section", size = 0.347, default = false, side = 'right', icon = GetImage("unlocked.png")}) 
+                local VulnerabilitySection = Column:section({name = "Money Section", size = 0.347, default = false, side = 'right', icon = GetImage("unlocked.png")}) 
 
                 local GetFruitCup = LPH_NO_VIRTUALIZE(function()
                     local Found, Cup = false, nil;
@@ -14598,7 +14598,7 @@ if Game_Name == "The Bronx" then
                         return
                     end
 
-                    HideUI("buying products 🍉\nif you are stuck here, PLEASE WAIT!!")
+                    HideUI("collecting products 💵\nif you are stuck here, WAIT")
 
                     local OLDCFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
 
@@ -14835,7 +14835,7 @@ if Game_Name == "South Bronx" then
         local LocalPlayerTab, PlayersTab, PurchaseGunTab = window:tab({name = "Main", tabs = {"Local Player", "Players", "Teleports"}, icon = GetImage("World.png")}) do
             do -- \\ Local Player
                 local LocalPlayerColumn = LocalPlayerTab:column({})
-                local LocalPlayerModsSection = LocalPlayerColumn:section({name = "Local Player Modifications", side = "left", size = 0.475})
+                local LocalPlayerModsSection = LocalPlayerColumn:section({name = "Character Modifications", side = "left", size = 0.475})
 
                 local __Modifications = {
                     "Infinite Stamina";
@@ -15365,7 +15365,7 @@ if Game_Name == "BlockSpin" then
             local LocalPlayerColumn = LocalPlayerTab:column({})
             local LocalPlayerModsSection = LocalPlayerColumn:section({name = "Local Player Modifications", side = "left", size = 0.475})
 
-            local FarmingSection = LocalPlayerColumn:section({name = "Auto-Farming Utilities", side = "left", size = 0.475, icon = GetImage("Wheatt.png")})
+            local FarmingSection = LocalPlayerColumn:section({name = "Character Utilities", side = "left", size = 0.475, icon = GetImage("Wheatt.png")})
 
             local _ScriptLoaded = false
 
@@ -15506,7 +15506,7 @@ window:seperator({name = "Combat"}) do
         end})
     end
 
-    local AimlockTab = window:tab({name = "Aimlock", tabs = {"General Settings"}, icon = GetImage("Aimlock.png")}) do
+    local AimlockTab = window:tab({name = "Aimbot", tabs = {"General Settings"}, icon = GetImage("Aimlock.png")}) do
         local AimlockAimColumn = AimlockTab:column({})
 
         local GeneralSection = AimlockAimColumn:section({name = "General", side = "left", size = 0.23, icon = GetImage("UZI.png")})
@@ -15744,10 +15744,10 @@ window:seperator({name = "Combat"}) do
 end
 
 window:seperator({name = "World"}) do
-    local VisualsTab = window:tab({name = "Visuals", tabs = {"Players"}, icon = GetImage("ESP.png")})
+    local VisualsTab = window:tab({name = "ESP", tabs = {"Players"}, icon = GetImage("ESP.png")})
 
     local VisualsColum = VisualsTab:column({})
-    local PlayerVisualsSection = VisualsColum:section({name = "Player Visuals", side = "left", size = 0.725})
+    local PlayerVisualsSection = VisualsColum:section({name = "Player ESP", side = "left", size = 0.725})
 
     PlayerVisualsSection:toggle({name = "Enabled", flag = "PlayerVisuals_Enabled", type = "toggle", callback = function(state)
         Config.ESP.Enabled = state
